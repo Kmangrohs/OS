@@ -1,0 +1,25 @@
+I'm currently 2 hours into the initial Kernal build. Setting up the VM with Fedora 20 proved challenging because I have an HP loatop.
+I had to go into my VIOS settings as a gues, to set the BIOS admid password, then restart and login to BIOS as the admin and enable
+virtualization. THen the changed wouldn't take effect until I pulled the battery out of my laptop... THanks stackoverflow
+I'm considering removiing the 'make clean' option from the makefile in the Kernal source so that I don't have to do this full build again by accident..
+
+I finally built the Kernel and am looking the fork.c source code. I found the commented line where max_threads/2 is being sent. I changed the line to  *95/100 instead of /2    which should set the number of max threads to 95% instead of 50%. 
+At first I was scared to mess with the kernel source code. but after awhile of looking through fork.c I figured that thinking about it was only going to get me so far.. So I started to change values and recompile. I never did get the ulimit
+-Ha command to display anything other than the below capture after any changes made, but Piazza and I are fairly certain that this is the correct line to alter. .patch file that I included will show the change to the source code that I made.
+
+core file size          (blocks, -c) unlimited
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 15906
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 4096
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 15906
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
